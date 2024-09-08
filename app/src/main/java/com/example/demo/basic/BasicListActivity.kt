@@ -1,9 +1,12 @@
 package com.example.demo.basic
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.demo.basic.shape.ShapeDrawActivity
 import com.example.opengles.R
 
 class BasicListActivity : AppCompatActivity() {
@@ -15,6 +18,10 @@ class BasicListActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    fun onShapeDrawActivity(view: View) {
+        startActivity(Intent(this, ShapeDrawActivity::class.java))
     }
 
 }

@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TqDemo">
         <activity
+            android:name="com.example.demo.basic.shape.ShapeDrawActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.demo.camera.glthread.FBOActivity"
             android:exported="false" />
         <activity
