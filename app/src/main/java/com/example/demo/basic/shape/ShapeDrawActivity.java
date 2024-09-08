@@ -11,6 +11,7 @@ import com.example.demo.base.egl.BaseGLThread;
 import com.example.demo.base.egl.GLCallback;
 import com.example.demo.base.egl.GLSurface;
 import com.example.demo.base.egl.SimpleTrianglesEGLHelper;
+import com.example.demo.base.egl.SimpleTrianglesStrideEGLHelper;
 import com.example.opengles.databinding.ActivityShapeDrawBinding;
 
 public class ShapeDrawActivity extends AppCompatActivity implements SurfaceHolder.Callback {
@@ -69,7 +70,7 @@ public class ShapeDrawActivity extends AppCompatActivity implements SurfaceHolde
         public void onDestroy() {
 
         }
-    }, new SimpleTrianglesEGLHelper());
+    }, new SimpleTrianglesStrideEGLHelper());
     GLSurface surface;
 
     @Override
