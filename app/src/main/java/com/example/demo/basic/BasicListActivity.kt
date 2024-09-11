@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.demo.basic.shape.ShapeDrawActivity
+import com.example.demo.basic.texture.TextureActivity
 import com.example.opengles.R
 
 class BasicListActivity : AppCompatActivity() {
@@ -22,6 +23,10 @@ class BasicListActivity : AppCompatActivity() {
 
     fun onShapeDrawActivity(view: View) {
         startActivity(Intent(this, ShapeDrawActivity::class.java))
+    }
+
+    fun onTextureDrawActivity(view: View) {
+        startActivity(Intent(this, TextureActivity::class.java))
     }
 
 }

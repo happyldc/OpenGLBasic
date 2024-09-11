@@ -12,4 +12,9 @@
     android:layout_height="wrap_content"
     android:text="图形绘制"
     android:onClick="onShapeDrawActivity"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="纹理贴图"
+        android:onClick="onTextureDrawActivity"/>
 </LinearLayout>
