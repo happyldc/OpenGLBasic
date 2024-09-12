@@ -122,6 +122,9 @@ public class SimpleTextureEGLHelper extends EGLHelper {
         //stride：跨度 点和点直接的间隔  1个点2个坐标（x,y）,一个float占4个字节 则跨度为8
         GLES20.glVertexAttribPointer(positionHandle, 2, GLES20.GL_FLOAT, false, 8, vertexBuffer);
         GLES20.glVertexAttribPointer(texturePositionHandle, 2, GLES20.GL_FLOAT, false, 8, textureBuffer);
+        //默认激活第0个 总的有GL_TEXTURE31个
+//        GLES20.glActiveTexture(GLES20.GL_TEXTURE5);
+//        GLES20.glUniform1i(texturePositionHandle,5);
 
         //提交纹理图方式1
          GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, textureImgWidth, textureImgHeight, 0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, textureImgBuffer);

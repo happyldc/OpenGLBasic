@@ -136,12 +136,14 @@ public abstract class EGLHelper {
         }
         return true;
     }
-    int loadShader(int type, String shaderCode) {
+
+    protected int loadShader(int type, String shaderCode) {
         int shader = GLES20.glCreateShader(type);
         GLES20.glShaderSource(shader, shaderCode);
         GLES20.glCompileShader(shader);
         return shader;
     }
+
     protected void ensureOutSurfacesCreated() {
         // 渲染(绘制)
         for (GLSurface output : outputSurfaces) {
@@ -153,6 +155,7 @@ public abstract class EGLHelper {
         }
 
     }
+
     public abstract void initShaders();
 
     public abstract void render();
