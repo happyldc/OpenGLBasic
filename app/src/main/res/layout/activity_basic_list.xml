@@ -29,4 +29,9 @@
         android:layout_height="wrap_content"
         android:onClick="onFBO2Activity"
         android:text="FBO2" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onFBO3TextureActivity"
+        android:text="FBO(纹理图绘制)" />
 </LinearLayout>
