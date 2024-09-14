@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.demo.basic.fbo1.FBO1Activity
+import com.example.demo.basic.fbo1.FBO2Activity
 import com.example.demo.basic.shape.ShapeDrawActivity
 import com.example.demo.basic.texture.TextureActivity
 import com.example.opengles.R
@@ -32,6 +33,11 @@ class BasicListActivity : AppCompatActivity() {
 
     fun onFBO1Activity(view: View) {
         startActivity(Intent(this, FBO1Activity::class.java))
+
+    }
+
+    fun onFBO2Activity(view: View) {
+        startActivity(Intent(this, FBO2Activity::class.java))
 
     }
 

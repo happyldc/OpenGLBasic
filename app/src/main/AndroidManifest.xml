@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TqDemo">
         <activity
+            android:name="com.example.demo.basic.fbo1.FBO2Activity"
+            android:exported="false" />
+        <activity
             android:name="com.example.demo.basic.fbo1.FBO1Activity"
             android:exported="false" />
         <activity

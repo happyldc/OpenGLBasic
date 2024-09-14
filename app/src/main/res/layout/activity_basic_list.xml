@@ -24,4 +24,9 @@
         android:layout_height="wrap_content"
         android:onClick="onFBO1Activity"
         android:text="FBO1" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onFBO2Activity"
+        android:text="FBO2" />
 </LinearLayout>

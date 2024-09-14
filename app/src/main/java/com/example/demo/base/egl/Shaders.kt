@@ -69,6 +69,31 @@ class Shaders {
             }
         """.trimIndent()
 
+
+
+        val matrix_texture_vertex_shader = """
+            attribute vec4 vPosition;
+            attribute vec2 aTexCoord;
+            varying vec2 vTexCoord;
+            uniform mat4 uMatrix;
+
+            void main() {
+                gl_Position = uMatrix * vPosition;
+                vTexCoord = aTexCoord;
+            }
+            
+        """.trimIndent()
+        val matrix_texture_fragment_shader = """
+            precision mediump float;
+            varying vec2 vTexCoord;
+            uniform sampler2D sTexture;
+
+            void main() {
+                gl_FragColor = texture2D(sTexture, vTexCoord);
+            }
+        """.trimIndent()
+
+
     }
 
 
