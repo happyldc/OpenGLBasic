@@ -28,7 +28,7 @@ public class FBOCameraEGLHelper extends EGLHelper {
     private CameraRender cameraRender = new CameraRender();
 
     private OESToFBOProgram oesToFBOProgram = new OESToFBOProgram();
-    private FBOToSurfaceProgram fboToSurfaceProgram = new FBOToSurfaceProgram();
+//    private FBOToSurfaceProgram fboToSurfaceProgram = new FBOToSurfaceProgram();
 
     public FBOCameraEGLHelper() {
         drawTextureProgram.setRotation(0);
@@ -48,12 +48,13 @@ public class FBOCameraEGLHelper extends EGLHelper {
     public void initShaders() {
         cameraRender.init();
         oesToFBOProgram.init();
-        fboToSurfaceProgram.init();
+//        fboToSurfaceProgram.init();
         //绘制三角形的顶点
         int[] frameBuffer = new int[1];
         fboTextureId = createEmptyTexture2DBindFrameBuffer(frameBuffer, width, height);
         frameBufferId = frameBuffer[0];
-
+        drawTextureProgram.initShaders();
+        drawTextureProgram.setRotation(-90);
     }
 
     public static int createEmptyTexture2DBindFrameBuffer(int[] frameBuffer, int texPixWidth, int texPixHeight) {
@@ -63,7 +64,7 @@ public class FBOCameraEGLHelper extends EGLHelper {
         // 绑定GL_TEXTURE_2D纹理
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0]);
         // 纹理采样
-        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
@@ -103,7 +104,8 @@ public class FBOCameraEGLHelper extends EGLHelper {
             // 设置视窗大小及位置
             GLES20.glViewport(output.getViewport().x, output.getViewport().y, output.getViewport().width, output.getViewport().height);
             // 绘制
-            fboToSurfaceProgram.drawToScreen(fboTextureId);
+            drawTextureProgram.render(fboTextureId);
+//            fboToSurfaceProgram.drawToScreen(fboTextureId);
             // 交换显存(将surface显存和显示器的显存交换)
             EGL14.eglSwapBuffers(eglDisplay, output.getEglSurface());
         }
