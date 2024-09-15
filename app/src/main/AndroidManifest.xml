@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TqDemo">
         <activity
+            android:name="com.example.demo.basic.fbo4.FBOCameraPreviewActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.demo.basic.fbo3.FBO3Activity"
             android:exported="false" />
         <activity
@@ -30,33 +33,7 @@
         <activity
             android:name="com.example.demo.basic.shape.ShapeDrawActivity"
             android:exported="false" />
-        <activity
-            android:name="com.example.demo.camera.glthread.FBOActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.demo.opengl.OpenGLActivity"
-            android:exported="false" />
 
-        <service
-            android:name="com.example.demo.camera.minize.PreviewMinizeService"
-            android:enabled="true"
-            android:exported="true" />
-
-        <activity
-            android:name="com.example.demo.camera.minize.NormalPreviewActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.demo.camera.GLSurfaceViewActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.demo.camera.TextureViewActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.demo.camera.SurfaceViewActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.demo.basic.DrawOnSurfaceViewActivity"
-            android:exported="false" />
         <activity
             android:name="com.example.demo.basic.BasicListActivity"
             android:exported="false" />

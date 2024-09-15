@@ -73,8 +73,8 @@ public abstract class EGLHelper {
         // 这里要先创建一个surface 之后再初始化着色器  没有这一步之后的着色器初始化都有问题
         // 创建 PBuffer Surface
         int[] pbufferAttributes = {
-                EGL14.EGL_WIDTH, 1,   // 设置 PBuffer 的宽度
-                EGL14.EGL_HEIGHT, 1, // 设置 PBuffer 的高度
+                EGL14.EGL_WIDTH, 720,   // 设置 PBuffer 的宽度
+                EGL14.EGL_HEIGHT, 1280, // 设置 PBuffer 的高度
                 EGL14.EGL_NONE
         };
         eglSurface = EGL14.eglCreatePbufferSurface(eglDisplay, eglConfig, pbufferAttributes, 0);

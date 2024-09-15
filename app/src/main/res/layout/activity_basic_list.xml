@@ -34,4 +34,9 @@
         android:layout_height="wrap_content"
         android:onClick="onFBO3TextureActivity"
         android:text="FBO(纹理图绘制)" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onFBOCameraActivity"
+        android:text="FBO(摄像头预览)" />
 </LinearLayout>

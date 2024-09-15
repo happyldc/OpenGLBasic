@@ -93,6 +93,24 @@ class Shaders {
             }
         """.trimIndent()
 
+        val oes_texture_vertex_shader="""
+            attribute vec4 position;
+            attribute vec2 texCoord;
+            varying vec2 vTexCoord;
+            void main() {
+                gl_Position = position;
+                vTexCoord = texCoord;
+            }
+        """.trimIndent()
+        val oes_texture_fragment_shader="""
+            #extension GL_OES_EGL_image_external : require
+            precision mediump float;
+            varying vec2 vTexCoord;
+            uniform samplerExternalOES oesTexture;
+            void main() {
+                gl_FragColor = texture2D(oesTexture, vTexCoord);
+            }        
+        """.trimIndent()
 
     }
 

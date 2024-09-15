@@ -33,7 +33,7 @@ public class SimpleSurfaceViewCallback implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
-
+        glSurface.setViewport(0, 0, width, height);
     }
 
     @Override
