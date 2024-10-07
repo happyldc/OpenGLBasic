@@ -4,6 +4,7 @@ import android.graphics.SurfaceTexture;
 import android.opengl.EGL14;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
+import android.opengl.GLES30;
 
 import com.example.demo.base.egl.EGLHelper;
 import com.example.demo.base.egl.GLSurface;
@@ -28,7 +29,8 @@ public class FBOCameraEGLHelper extends EGLHelper {
     private CameraRender cameraRender = new CameraRender();
 
     private OESToFBOProgram oesToFBOProgram = new OESToFBOProgram();
-//    private FBOToSurfaceProgram fboToSurfaceProgram = new FBOToSurfaceProgram();
+    private  GrayProgram grayProgram=new GrayProgram();
+    private FBOToSurfaceProgram fboToSurfaceProgram = new FBOToSurfaceProgram();
 
     public FBOCameraEGLHelper() {
         drawTextureProgram.setRotation(0);
@@ -48,7 +50,8 @@ public class FBOCameraEGLHelper extends EGLHelper {
     public void initShaders() {
         cameraRender.init();
         oesToFBOProgram.init();
-//        fboToSurfaceProgram.init();
+        grayProgram.initShaders();
+        fboToSurfaceProgram.init();
         //绘制三角形的顶点
         int[] frameBuffer = new int[1];
         fboTextureId = createEmptyTexture2DBindFrameBuffer(frameBuffer, width, height);
@@ -96,6 +99,14 @@ public class FBOCameraEGLHelper extends EGLHelper {
 
         getSurfaceTexture().updateTexImage();
         oesToFBOProgram.drawToFramebuffer(cameraRender.getTextureId(), frameBufferId);
+
+        // 绑定FRAMEBUFFER缓冲区
+        GLES30.glBindFramebuffer(GLES30.GL_FRAMEBUFFER, frameBufferId);
+
+        grayProgram.render(fboTextureId);
+        GLES30.glBindFramebuffer(GLES30.GL_FRAMEBUFFER, 0);
+        // 解绑 FBO
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
 
         for (GLSurface output : outputSurfaces) {
             GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);

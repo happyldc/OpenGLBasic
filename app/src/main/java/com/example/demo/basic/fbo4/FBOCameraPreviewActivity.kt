@@ -51,31 +51,33 @@ class FBOCameraPreviewActivity : CameraBaseActivity() {
     }
 
     private fun initListener() {
-        binding.surfaceView.holder.addCallback(object : SimpleSurfaceViewCallback(glThread) {
-            override fun surfaceCreated(holder: SurfaceHolder) {
-                super.surfaceCreated(holder)
-                glThread.requestRender()
-                glThread.start()
-            }
-        })
-        binding.svBottomLeft.holder.addCallback(object : SimpleSurfaceViewCallback(glThread) {
-            override fun surfaceCreated(holder: SurfaceHolder) {
-                super.surfaceCreated(holder)
-                glThread.requestRender()
-            }
-        })
-        binding.svBottomRight.holder.addCallback(object : SimpleSurfaceViewCallback(glThread) {
-            override fun surfaceCreated(holder: SurfaceHolder) {
-                super.surfaceCreated(holder)
-                glThread.requestRender()
-            }
-        })
-        binding.svTopRight.holder.addCallback(object : SimpleSurfaceViewCallback(glThread) {
-            override fun surfaceCreated(holder: SurfaceHolder) {
-                super.surfaceCreated(holder)
-                glThread.requestRender()
-            }
-        })
+        glThread.requestRender()
+        glThread.start()
+//        binding.surfaceView.holder.addCallback(object : SimpleSurfaceViewCallback(glThread) {
+//            override fun surfaceCreated(holder: SurfaceHolder) {
+//                super.surfaceCreated(holder)
+//                glThread.requestRender()
+//                glThread.start()
+//            }
+//        })
+//        binding.svBottomLeft.holder.addCallback(object : SimpleSurfaceViewCallback(glThread) {
+//            override fun surfaceCreated(holder: SurfaceHolder) {
+//                super.surfaceCreated(holder)
+//                glThread.requestRender()
+//            }
+//        })
+//        binding.svBottomRight.holder.addCallback(object : SimpleSurfaceViewCallback(glThread) {
+//            override fun surfaceCreated(holder: SurfaceHolder) {
+//                super.surfaceCreated(holder)
+//                glThread.requestRender()
+//            }
+//        })
+//        binding.svTopRight.holder.addCallback(object : SimpleSurfaceViewCallback(glThread) {
+//            override fun surfaceCreated(holder: SurfaceHolder) {
+//                super.surfaceCreated(holder)
+//                glThread.requestRender()
+//            }
+//        })
 
 
     }
