@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TqDemo">
         <activity
+            android:name="com.example.demo.basic.camera.CameraGLSurfaceViewActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.demo.basic.fbo4.FBOCameraPreviewActivity"
             android:exported="false" />
         <activity
@@ -33,7 +36,6 @@
         <activity
             android:name="com.example.demo.basic.shape.ShapeDrawActivity"
             android:exported="false" />
-
         <activity
             android:name="com.example.demo.basic.BasicListActivity"
             android:exported="false" />

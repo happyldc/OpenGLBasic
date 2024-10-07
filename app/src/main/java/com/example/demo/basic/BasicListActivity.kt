@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.demo.basic.camera.CameraGLSurfaceViewActivity
 import com.example.demo.basic.fbo1.FBO1Activity
 import com.example.demo.basic.fbo1.FBO2Activity
 import com.example.demo.basic.fbo3.FBO3Activity
@@ -49,6 +50,11 @@ class BasicListActivity : AppCompatActivity() {
 
     fun onFBOCameraActivity(view: View) {
         startActivity(Intent(this, FBOCameraPreviewActivity::class.java))
+
+    }
+
+    fun onCameraSurfaceViewActivity(view: View) {
+        startActivity(Intent(this, CameraGLSurfaceViewActivity::class.java))
     }
 
 }
