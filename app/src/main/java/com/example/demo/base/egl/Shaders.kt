@@ -72,6 +72,8 @@ class Shaders {
 
 
         val matrix_texture_vertex_shader = """
+            #version 100
+            precision mediump float; // 设置默认精度
             attribute vec4 vPosition;
             attribute vec2 aTexCoord;
             varying vec2 vTexCoord;
@@ -84,7 +86,9 @@ class Shaders {
             
         """.trimIndent()
         val matrix_texture_fragment_shader = """
-            precision mediump float;
+            #version 100
+            #extension GL_OES_EGL_image_external : require // 置于最前面
+            precision mediump float; // 设置默认精度
             varying vec2 vTexCoord;
             uniform sampler2D sTexture;
 

@@ -2,18 +2,12 @@ package com.example.demo.basic.fbo4;
 
 import android.graphics.SurfaceTexture;
 import android.opengl.EGL14;
-import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
-import android.opengl.GLES30;
 
 import com.example.demo.base.egl.EGLHelper;
 import com.example.demo.base.egl.GLSurface;
-import com.example.demo.base.egl.Shaders;
 import com.example.demo.basic.fbo1.DrawTextureProgram;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
 
 /**
  * fbo1
@@ -29,7 +23,6 @@ public class FBOCameraEGLHelper extends EGLHelper {
     private CameraRender cameraRender = new CameraRender();
 
     private OESToFBOProgram oesToFBOProgram = new OESToFBOProgram();
-    private  GrayProgram grayProgram=new GrayProgram();
     private FBOToSurfaceProgram fboToSurfaceProgram = new FBOToSurfaceProgram();
 
     public FBOCameraEGLHelper() {
@@ -50,14 +43,12 @@ public class FBOCameraEGLHelper extends EGLHelper {
     public void initShaders() {
         cameraRender.init();
         oesToFBOProgram.init();
-        grayProgram.initShaders();
         fboToSurfaceProgram.init();
         //绘制三角形的顶点
         int[] frameBuffer = new int[1];
         fboTextureId = createEmptyTexture2DBindFrameBuffer(frameBuffer, width, height);
         frameBufferId = frameBuffer[0];
-        drawTextureProgram.initShaders();
-        drawTextureProgram.setRotation(-90);
+
     }
 
     public static int createEmptyTexture2DBindFrameBuffer(int[] frameBuffer, int texPixWidth, int texPixHeight) {
@@ -67,7 +58,7 @@ public class FBOCameraEGLHelper extends EGLHelper {
         // 绑定GL_TEXTURE_2D纹理
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0]);
         // 纹理采样
-        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
@@ -96,17 +87,9 @@ public class FBOCameraEGLHelper extends EGLHelper {
             return;
         }
         GLES20.glViewport(0, 0, width, height);
-
         getSurfaceTexture().updateTexImage();
+
         oesToFBOProgram.drawToFramebuffer(cameraRender.getTextureId(), frameBufferId);
-
-        // 绑定FRAMEBUFFER缓冲区
-        GLES30.glBindFramebuffer(GLES30.GL_FRAMEBUFFER, frameBufferId);
-
-        grayProgram.render(fboTextureId);
-        GLES30.glBindFramebuffer(GLES30.GL_FRAMEBUFFER, 0);
-        // 解绑 FBO
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
 
         for (GLSurface output : outputSurfaces) {
             GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
@@ -115,8 +98,7 @@ public class FBOCameraEGLHelper extends EGLHelper {
             // 设置视窗大小及位置
             GLES20.glViewport(output.getViewport().x, output.getViewport().y, output.getViewport().width, output.getViewport().height);
             // 绘制
-            drawTextureProgram.render(fboTextureId);
-//            fboToSurfaceProgram.drawToScreen(fboTextureId);
+            fboToSurfaceProgram.drawToScreen(fboTextureId);
             // 交换显存(将surface显存和显示器的显存交换)
             EGL14.eglSwapBuffers(eglDisplay, output.getEglSurface());
         }

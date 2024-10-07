@@ -4,6 +4,7 @@ import android.opengl.GLES20;
 import android.opengl.Matrix;
 
 import com.example.demo.base.egl.Shaders;
+import com.example.demo.basic.GLUtils;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -76,8 +77,8 @@ public class DrawTextureProgram {
 
 
     public void initShaders() {
-        vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, Shaders.Companion.getMatrix_texture_vertex_shader());
-        fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, Shaders.Companion.getMatrix_texture_fragment_shader());
+        vertexShader = GLUtils.loadShader(GLES20.GL_VERTEX_SHADER, Shaders.Companion.getMatrix_texture_vertex_shader());
+        fragmentShader = GLUtils.loadShader(GLES20.GL_FRAGMENT_SHADER, Shaders.Companion.getMatrix_texture_fragment_shader());
         program = GLES20.glCreateProgram();
         GLES20.glAttachShader(program, vertexShader);
         GLES20.glAttachShader(program, fragmentShader);
@@ -96,9 +97,11 @@ public class DrawTextureProgram {
         Matrix.setRotateM(rotationMatrix, 0, a, 0, 0, 1);
 
     }
-    public void render( int textureId){
-        render(GLES20.GL_TEXTURE_2D,textureId);
+
+    public void render(int textureId) {
+        render(GLES20.GL_TEXTURE_2D, textureId);
     }
+
     public void render(int textureType, int textureId) {
         GLES20.glUseProgram(program);
         // 将旋转矩阵传递给着色器
@@ -126,13 +129,6 @@ public class DrawTextureProgram {
 
     public void destroy() {
 
-    }
-
-    protected int loadShader(int type, String shaderCode) {
-        int shader = GLES20.glCreateShader(type);
-        GLES20.glShaderSource(shader, shaderCode);
-        GLES20.glCompileShader(shader);
-        return shader;
     }
 
 }

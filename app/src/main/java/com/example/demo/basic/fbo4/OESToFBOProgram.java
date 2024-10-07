@@ -4,6 +4,8 @@ import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.GLES30;
 
+import com.example.demo.basic.GLUtils;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -66,16 +68,10 @@ public class OESToFBOProgram {
         textureBuffer.position(0);
     }
 
-    protected int loadShader(int type, String shaderCode) {
-        int shader = GLES20.glCreateShader(type);
-        GLES20.glShaderSource(shader, shaderCode);
-        GLES20.glCompileShader(shader);
-        return shader;
-    }
 
     public void init() {
-        vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, Shaders.INSTANCE.getOes_texture_vertex_shader());
-        fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, Shaders.INSTANCE.getOes_to_buffer_fragment_shader());
+        vertexShader = GLUtils.loadShader(GLES20.GL_VERTEX_SHADER, Shaders.INSTANCE.getOes_texture_vertex_shader());
+        fragmentShader = GLUtils.loadShader(GLES20.GL_FRAGMENT_SHADER, Shaders.INSTANCE.getOes_to_buffer_fragment_shader());
         program = GLES20.glCreateProgram();
         GLES20.glAttachShader(program, vertexShader);
         GLES20.glAttachShader(program, fragmentShader);
@@ -86,7 +82,7 @@ public class OESToFBOProgram {
 
     }
 
-    public void drawToFramebuffer(int oesTextureId,int fboId) {
+    public void drawToFramebuffer(int oesTextureId, int fboId) {
         // 绑定 FBO 进行离屏渲染
 
         // 使用 OES 纹理渲染的着色器程序
@@ -97,7 +93,6 @@ public class OESToFBOProgram {
         GLES30.glUniform1i(samplerHandler, 0);
 
         GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, oesTextureId);
-
         // 绑定FRAMEBUFFER缓冲区
         GLES30.glBindFramebuffer(GLES30.GL_FRAMEBUFFER, fboId);
 
